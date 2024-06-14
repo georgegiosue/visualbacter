@@ -1,7 +1,7 @@
 import * as tf from "@tensorflow/tfjs";
 import { NextRequest, NextResponse } from "next/server";
 
-const URL = process.env.URL
+const URL = process.env.INFERENCE_URL
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
