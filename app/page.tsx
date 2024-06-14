@@ -102,7 +102,7 @@ export default function Home() {
     <main className="grid grid-cols-1 md:grid-cols-2 min-h-screen p-4 lg:p-24">
       <section className="flex flex-col">
         <h1 className="text-5xl font-bold">VisualBacter</h1>
-        <span>Detection of ETA's with convolutional neural networks</span>
+        <span>Detection of ETA´s with convolutional neural networks</span>
         <Badge variant="outline" className="mr-2 w-fit">
           80.76% Accuracy
         </Badge>
