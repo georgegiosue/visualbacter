@@ -1,7 +1,7 @@
 import * as tf from "@tensorflow/tfjs";
 import { NextRequest, NextResponse } from "next/server";
 
-const URL = "http://172.210.99.32:8501/v1/models/visualbacter:predict";
+const URL = process.env.URL
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     instances: array,
   };
 
-  const predictionsRequest = await fetch(URL, {
+  const predictionsRequest = await fetch(URL!, {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
