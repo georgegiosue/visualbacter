@@ -93,7 +93,7 @@ const PredictionChart: React.FC<PredictionChartProps> = ({ predictions }) => {
     return () => {
       chartInstance.dispose();
     };
-  }, []);
+  }, [predictions]);
 
   return <div ref={chartRef} style={{ width: "600px", height: "300px" }}/>;
 };

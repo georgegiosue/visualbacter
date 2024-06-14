@@ -67,11 +67,21 @@ export default function Home() {
       img.onload = async () => {
         const tensor = tf.browser.fromPixels(img);
 
-        const tensorData = tensor.dataSync();
+        const tensorGrayScale = tf.image.rgbToGrayscale(tensor);
+
+        let tensorExpanded = tensorGrayScale.expandDims(0) as tf.Tensor3D;
+
+        if (
+          tensorExpanded.shape[1] !== 150 ||
+          tensorExpanded.shape[2] !== 150
+        ) {
+          tensorExpanded = tf.image.resizeBilinear(tensorExpanded, [150, 150]);
+        }
+
+        const array = await tensorExpanded.array();
 
         const body = {
-          tensor: Array.from(tensorData),
-          shape: tensor.shape,
+          array: array,
         };
 
         const requestPredictions = await fetch("/api/prediction", {

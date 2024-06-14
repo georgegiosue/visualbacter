@@ -1,24 +1,11 @@
-import * as tf from "@tensorflow/tfjs";
 import { NextRequest, NextResponse } from "next/server";
 
-const URL = process.env.INFERENCE_URL
+const URL = process.env.INFERENCE_URL;
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
 
-  let { tensor, shape } = data;
-
-  tensor = tf.tensor(tensor, shape);
-
-  const tensorGrayScale = tf.image.rgbToGrayscale(tensor);
-
-  let tensorExpanded = tensorGrayScale.expandDims(0);
-
-  if (tensorExpanded.shape[1] !== 150 || tensorExpanded.shape[2] !== 150) {
-    tensorExpanded = tf.image.resizeBilinear(tensorExpanded, [150, 150]);
-  }
-
-  const array = await tensorExpanded.array();
+  const { array } = data;
 
   const body = {
     instances: array,
